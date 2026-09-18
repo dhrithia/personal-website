@@ -22,106 +22,36 @@ function Reveal({ children, delay = 0 }: { children: ReactNode; delay?: number }
 
 const PROJECTS = [
   {
-    title: "MediSync",
+    title: "CNOW",
     year: "2024",
-    type: "Hackathon · HackMIT",
-    tags: ["React", "FastAPI", "OpenAI", "PostgreSQL"],
-    summary: "AI-powered patient intake that pre-triages ER patients via conversational AI, reducing wait times.",
+    type: "Hackathon · Philly Codefest",
+    tags: ["OpenAI API", "Flask", "Java", "Python", "Figma", "AWS Amplify"],
+    summary: "An AI chatbot for Comcast Now that answers service questions and helps users pick the right internet, streaming, or mobile plan based on their budget.",
     description:
-      "MediSync was built in 24 hours at HackMIT 2024. The core insight was that most ER inefficiency comes from triage bottlenecks — patients wait to describe their symptoms to an overwhelmed nurse. We built a conversational AI intake system that asks structured medical questions before the patient reaches the desk, generates a risk-scored summary, and routes patients to the right queue automatically.",
+      "Built with a team of 5 for Philly Codefest 2024, CNOW is a chatbot for Comcast's Comcast Now service, scoped to only answer questions about Comcast and its offerings. It's paired with a budget calculator that recommends internet, streaming, or mobile plans based on the user's monthly income, aiming to make plan selection less overwhelming for new customers.",
     highlights: [
-      "GPT-4 powered multi-turn intake flow with dynamic follow-up questions",
-      "PostgreSQL schema for storing anonymized triage history and outcomes",
-      "Risk scoring model trained on MIMIC-III emergency records",
-      "Real-time nurse dashboard with case summaries and severity indicators",
+      "Trained the OpenAI-powered chatbot to stay strictly on-topic for Comcast's services",
+      "Built the backend with Flask and Java, connecting AI logic through Python",
+      "Designed the front end in Figma, implemented in HTML/CSS",
+      "Deployed and hosted the full project on AWS Amplify",
     ],
-    award: "Best Health Tech — HackMIT 2024",
-    github: "#",
-    demo: "#",
+    github: "https://github.com/dhrithia/QuickER",
   },
   {
-    title: "Codebase.fm",
-    year: "2024",
-    type: "Personal project",
-    tags: ["Next.js", "TypeScript", "Supabase", "Tailwind"],
-    summary: "A platform for sharing annotated code walkthroughs as audio episodes — podcasts meets code review.",
+    title: "QuickER",
+    year: "2026",
+    type: "Hackathon · Philly Codefest",
+    tags: ["Random Forest", "Python", "Mapbox", "ArcGIS REST API", "Machine Learning"],
+    summary: "A real-time ER intelligence platform that recommends the fastest Philadelphia emergency room, not just the closest one, by predicting wait times.",
     description:
-      "Codebase.fm is a platform where engineers can share their work as timestamped audio walkthroughs, synchronized with the actual code. The idea came from noticing that most code review happens in silence — async, text-only, losing nuance. We wanted to bring back the experience of sitting next to someone and having them walk you through their thinking.",
+      "QuickER started from a simple observation: people default to the nearest ER even when a farther one could treat them in half the time. QuickER solves this by predicting wait times across every ER in Philadelphia and recommending the option with the lowest total time to care, combining predicted wait and travel time together.",
     highlights: [
-      "Audio recording + code diff sync using custom timestamps",
-      "Supabase for auth, episode storage, and realtime playback state",
-      "600+ signups on launch day via a Hacker News post",
-      "Built a semantic search layer over episode transcripts using embeddings",
+      "Trained a two-stage Random Forest model using Census zip code demographics, weather, and time-based patterns to predict patient volume and convert it into estimated wait times",
+      "Pulled live hospital data via the ArcGIS REST API and rendered it as a color-coded heatmap on an interactive Mapbox map",
+      "Built a smart recommendation panel that steers users to lower-wait ERs with one-click Google Maps navigation",
+      "Added a time forecast slider to show predicted ER conditions up to 6 hours ahead",
     ],
-    github: "#",
-    demo: "#",
-  },
-  {
-    title: "TrailMind",
-    year: "2023",
-    type: "Hackathon · TreeHacks",
-    tags: ["Python", "LangChain", "Mapbox", "Flask"],
-    summary: "Autonomous hiking assistant generating trail itineraries from natural language and live data.",
-    description:
-      "TrailMind is an autonomous agent that turns casual natural language prompts ('I want a 3-hour hike with a great view, not too steep, this Saturday') into detailed trail itineraries. It chains LLM reasoning with live weather, elevation, and trail condition APIs to produce day-of plans with gear recommendations.",
-    highlights: [
-      "LangChain agent with tool-calling for weather, elevation, and AllTrails APIs",
-      "Mapbox GL JS visualization of recommended routes with elevation profiles",
-      "Intent parsing layer for extracting difficulty, duration, and terrain preferences",
-      "Finalist at TreeHacks 2023 out of 300+ submissions",
-    ],
-    award: "Finalist — TreeHacks 2023",
-    github: "#",
-    demo: "#",
-  },
-  {
-    title: "Greptile CLI",
-    year: "2023",
-    type: "Personal project",
-    tags: ["Go", "OpenAI", "Git"],
-    summary: "Terminal tool for asking natural language questions about any git repository.",
-    description:
-      "Greptile is a CLI tool that lets you ask questions about any git repository in plain English. It indexes the commit history, diffs, and code structure locally, then answers questions like 'what changed in authentication last month?' or 'who wrote the payment module?'",
-    highlights: [
-      "Go binary that runs entirely offline after initial indexing",
-      "Embedding-based semantic search over code chunks and commit messages",
-      "Supports arbitrary git remote URLs — no setup beyond the binary",
-      "Sub-100ms response times on repos up to 10k commits",
-    ],
-    github: "#",
-  },
-  {
-    title: "SoundScape",
-    year: "2023",
-    type: "Personal project",
-    tags: ["Web Audio API", "Three.js", "React"],
-    summary: "Immersive 3D audio visualization mapping music frequencies to procedurally generated landscapes.",
-    description:
-      "SoundScape is a real-time music visualizer built with Three.js and the Web Audio API. FFT data from the audio stream drives a procedurally generated 3D terrain — bass frequencies deform the ground mesh, mids control particle density, and treble controls fog and lighting. The result feels like flying over a landscape that breathes with the music.",
-    highlights: [
-      "Custom GLSL shaders for terrain deformation driven by audio FFT bins",
-      "60fps on mid-range hardware using instanced mesh rendering",
-      "Supports file upload, microphone input, and Spotify playback (via Web Playback SDK)",
-      "Rendered at full resolution in WebGL 2 with post-processing bloom",
-    ],
-    github: "#",
-    demo: "#",
-  },
-  {
-    title: "Tersa",
-    year: "2022",
-    type: "Personal project",
-    tags: ["Rust", "WASM", "React"],
-    summary: "A fast, minimal note-taking app compiled to WebAssembly for near-native browser performance.",
-    description:
-      "Tersa is a note-taking app with a plain-text-first philosophy. The editor and file system are written in Rust and compiled to WASM — the core feels instant. Notes are stored as plain markdown files, synced via a small Rust server. No database, no lock-in.",
-    highlights: [
-      "Rust-based editor core compiled to WASM with wasm-bindgen",
-      "Custom rope data structure for O(log n) text edits on large documents",
-      "React UI shell communicating with WASM via typed TypeScript bindings",
-      "Local-first sync with conflict-free merge using CRDTs",
-    ],
-    github: "#",
+    github: "https://github.com/dhrithia/SevenCodefest",
   },
 ];
 
@@ -249,7 +179,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
         <div style={{ display: "flex", gap: "10px" }}>
           {project.github && (
             <a href={project.github} target="_blank" rel="noopener noreferrer" style={linkBtnStyle}>
-              <span>GitHub</span> GitHub
+              <span>GitHub</span>
             </a>
           )}
           {project.demo && (
@@ -285,15 +215,26 @@ export default function Projects() {
   return (
     <div style={{ maxWidth: "1300px", margin: "0 auto", padding: "0 52px 96px" }}>
       <Reveal>
-        <div style={{ marginBottom: "64px", paddingTop: "56px" }}>
-          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--accent)", background: "var(--accent-soft)", padding: "5px 12px", borderRadius: "6px" }}>
-            Work
-          </span>
-          <h1 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(40px, 5.5vw, 68px)", fontWeight: 300, letterSpacing: "-0.025em", lineHeight: 1.08, color: "var(--text)", margin: "16px 0 14px" }}>
-            Projects
-          </h1>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "15px", lineHeight: 1.7, color: "var(--text-secondary)", maxWidth: "460px" }}>
-            Things I've built — from hackathon sprints to longer-form personal work. Click any card to read more.
+        <div style={{ paddingTop: "80px", marginBottom: "80px" }}>
+          <p
+            style={{
+              fontFamily: "'Fraunces', serif",
+              fontSize: "clamp(56px, 7vw, 96px)",
+              fontWeight: 300,
+              fontStyle: "italic",
+              letterSpacing: "-0.03em",
+              lineHeight: 1.0,
+              color: "#e9e5f5",
+              marginBottom: "24px",
+            }}
+          >
+            technical{" "}
+            <span style={{ background: "linear-gradient(135deg, #818cf8, #a78bfa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+              projects.
+            </span>
+          </p>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "15px", lineHeight: 1.75, color: "#5e5980", maxWidth: "420px" }}>
+            left-brained activities. click on a project to see more.
           </p>
         </div>
       </Reveal>

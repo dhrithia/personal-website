@@ -145,15 +145,15 @@ export default function Design() {
                 marginBottom: "24px",
               }}
             >
-              Design &amp;
-              <br />
+              design{" "}
+              <span style={{ fontStyle: "normal" }}>&</span>
+              {" "}
               <span style={{ background: "linear-gradient(135deg, #818cf8, #a78bfa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                Visual work.
+                visual work.
               </span>
             </p>
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "15px", lineHeight: 1.75, color: "#5e5980", maxWidth: "420px" }}>
-              Occasional experiments — generative systems, mixed media, photography.
-              Not the main thing, but a real one.
+              right-brained activities. click on a project to see more.
             </p>
           </div>
         </Reveal>
