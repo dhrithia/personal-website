@@ -33,7 +33,7 @@ type Project = {
   award?: string;
 };
 
-const PROJECTS = [
+const PROJECTS: Project[] = [
   {
     title: "CNOW",
     year: "2024",
