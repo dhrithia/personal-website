@@ -224,12 +224,12 @@ export default function Projects() {
               fontStyle: "italic",
               letterSpacing: "-0.03em",
               lineHeight: 1.0,
-              color: "#e9e5f5",
+              color: "var(--text)",   // was "#e9e5f5"
               marginBottom: "24px",
             }}
           >
             technical{" "}
-            <span style={{ background: "linear-gradient(135deg, #818cf8, #a78bfa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+            <span style={{ background: "var(--gradient)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
               projects.
             </span>
           </p>

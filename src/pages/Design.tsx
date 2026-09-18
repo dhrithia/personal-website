@@ -1,16 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { X } from "lucide-react";
-import { useTheme } from "../context/theme";
-
-/* Auto-switch to dark on mount */
-function useForceDark() {
-  const { setDark } = useTheme();
-  useEffect(() => {
-    const wasDark = document.documentElement.classList.contains("dark");
-    setDark(true);
-    return () => setDark(wasDark);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-}
 
 function Reveal({ children, delay = 0 }: { children: ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -29,48 +18,83 @@ function Reveal({ children, delay = 0 }: { children: ReactNode; delay?: number }
 
 const PIECES = [
   {
-    title: "Topographic Series",
-    medium: "Digital illustration",
-    year: "2024",
+    title: "Deliberate Arrangements: Still Life",
+    medium: "Computer Graphics Imagery",
+    year: "2026",
     description:
-      "Contour-mapped landscapes generated from elevation data, rendered as layered vector prints. Each piece encodes a specific geographic location.",
+      "made this in maya for CGI II class. recreated an original still life painting by cynthia poole.",
     longDescription:
-      "I've always been fascinated by the way topographic maps flatten 3D space into something you can hold. This series started as an experiment in generative rendering — writing Python scripts that pull elevation data from SRTM datasets and render them as multilayer vector files. The final pieces are printed on matte cotton rag at large format.",
-    img: "https://images.unsplash.com/photo-1527489377706-5bf97e608852?w=1000&h=700&fit=crop&auto=format",
-  },
-  {
-    title: "Chromatic Drift",
-    medium: "Generative · p5.js",
-    year: "2023",
-    description:
-      "A study in color field painting reimagined through noise functions and simulated particle systems. Runs live in the browser.",
-    longDescription:
-      "Color field painting always interested me as a genre — the idea that pure color relationships could be emotionally meaningful without form or narrative. Chromatic Drift is my attempt to bring that sensibility to generative systems: each piece starts from a seeded noise field, grows particle trails across it, and settles into a final composition that's different every run.",
-    img: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=1000&h=700&fit=crop&auto=format",
-  },
-  {
-    title: "Circuit Botanica",
-    medium: "Mixed media print",
-    year: "2023",
-    description:
-      "Physical prints combining botanical drawings with PCB trace overlays — exploring the intersection of organic and engineered systems.",
-    longDescription:
-      "These started as botanical studies — careful ink drawings of leaves, stems, and root systems. I then layered KiCad PCB exports on top, tracing circuit paths over organic forms. The resulting prints feel like something between a field guide and a schematic. Printed on translucent vellum and mounted over light boxes for the final presentation.",
-    img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1000&h=700&fit=crop&auto=format",
-  },
-  {
-    title: "Depth Study No. 4",
-    medium: "Long-exposure photography",
-    year: "2022",
-    description:
-      "Long-exposure architectural photography shot around Cambridge and Boston, focusing on light, geometry, and negative space.",
-    longDescription:
-      "Shot over three nights around campus and downtown Boston. All images use 30–90 second exposures, which turns artificial light into something sculptural. I was interested in how architecture reads differently when motion blurs everything that's human-scale — you're left with structure and light alone.",
-    img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1000&h=700&fit=crop&auto=format",
+      "this project took 4 weeks, including many hours of crashing out over maya crashing on me. it was fun to get back in touch with my 3D-modeling skills after a while. my work was also featured in the SIGGRAPH 2026 FSSW exhibition :)",
+    images: [
+      "/design/still_life_cgi.png",
+      "/design/still_life_ref.png",
+    ],
   },
 ];
 
 type Piece = typeof PIECES[0];
+
+function Carousel({ images }: { images: string[] }) {
+  const [index, setIndex] = useState(0);
+
+  const goTo = (i: number) => setIndex((i + images.length) % images.length);
+
+  return (
+    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+      <img
+        src={images[index]}
+        alt=""
+        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+      />
+
+      {images.length > 1 && (
+        <>
+          <button
+            onClick={() => goTo(index - 1)}
+            style={{
+              position: "absolute", left: "12px", top: "50%", transform: "translateY(-50%)",
+              background: "rgba(0,0,0,0.5)", border: "none", borderRadius: "50%",
+              width: "36px", height: "36px", color: "#fff", cursor: "pointer",
+              display: "flex", alignItems: "center", justifyContent: "center", fontSize: "18px",
+            }}
+          >
+            ‹
+          </button>
+          <button
+            onClick={() => goTo(index + 1)}
+            style={{
+              position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)",
+              background: "rgba(0,0,0,0.5)", border: "none", borderRadius: "50%",
+              width: "36px", height: "36px", color: "#fff", cursor: "pointer",
+              display: "flex", alignItems: "center", justifyContent: "center", fontSize: "18px",
+            }}
+          >
+            ›
+          </button>
+
+          <div
+            style={{
+              position: "absolute", bottom: "16px", left: "50%", transform: "translateX(-50%)",
+              display: "flex", gap: "6px",
+            }}
+          >
+            {images.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setIndex(i)}
+                style={{
+                  width: "6px", height: "6px", borderRadius: "50%", border: "none", cursor: "pointer",
+                  background: i === index ? "#fff" : "rgba(255,255,255,0.4)",
+                  padding: 0,
+                }}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
 
 function PieceModal({ piece, onClose }: { piece: Piece; onClose: () => void }) {
   useEffect(() => {
@@ -91,8 +115,8 @@ function PieceModal({ piece, onClose }: { piece: Piece; onClose: () => void }) {
           position: "relative",
           width: "100%",
           maxWidth: "820px",
-          background: "#14121e",
-          border: "1px solid rgba(255,255,255,0.1)",
+          background: "var(--surface)",
+          border: "1px solid var(--border-strong)",
           borderRadius: "16px",
           overflow: "hidden",
           display: "grid",
@@ -101,18 +125,18 @@ function PieceModal({ piece, onClose }: { piece: Piece; onClose: () => void }) {
           boxShadow: "0 40px 100px rgba(0,0,0,0.5)",
         }}
       >
-        <img src={piece.img} alt={piece.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+        <Carousel images={piece.images} />
         <div style={{ padding: "40px", overflowY: "auto" }}>
-          <button onClick={onClose} style={{ position: "absolute", top: "16px", right: "16px", background: "rgba(255,255,255,0.08)", border: "none", cursor: "pointer", color: "#9b96b8", display: "flex", alignItems: "center", justifyContent: "center", width: "32px", height: "32px", borderRadius: "8px" }}>
+          <button onClick={onClose} style={{ position: "absolute", top: "16px", right: "16px", background: "var(--accent-soft)", border: "none", cursor: "pointer", color: "var(--text-secondary)", display: "flex", alignItems: "center", justifyContent: "center", width: "32px", height: "32px", borderRadius: "8px" }}>
             <X size={15} />
           </button>
-          <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", letterSpacing: "0.1em", textTransform: "uppercase", color: "#818cf8", marginBottom: "12px" }}>
+          <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "12px" }}>
             {piece.medium} · {piece.year}
           </p>
-          <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "28px", fontWeight: 400, fontStyle: "italic", color: "#e9e5f5", letterSpacing: "-0.02em", lineHeight: 1.15, marginBottom: "20px" }}>
+          <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "28px", fontWeight: 400, fontStyle: "italic", color: "var(--text)", letterSpacing: "-0.02em", lineHeight: 1.15, marginBottom: "20px" }}>
             {piece.title}
           </h2>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "14px", lineHeight: 1.75, color: "#9b96b8" }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "14px", lineHeight: 1.75, color: "var(--text-secondary)" }}>
             {piece.longDescription}
           </p>
         </div>
@@ -123,11 +147,10 @@ function PieceModal({ piece, onClose }: { piece: Piece; onClose: () => void }) {
 }
 
 export default function Design() {
-  useForceDark();
   const [selected, setSelected] = useState<Piece | null>(null);
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0c0b14" }}>
+    <div style={{ minHeight: "100vh" }}>
       <div style={{ maxWidth: "1300px", margin: "0 auto", padding: "0 52px 96px" }}>
 
         {/* Header */}
@@ -141,18 +164,18 @@ export default function Design() {
                 fontStyle: "italic",
                 letterSpacing: "-0.03em",
                 lineHeight: 1.0,
-                color: "#e9e5f5",
+                color: "var(--text)",
                 marginBottom: "24px",
               }}
             >
               design{" "}
               <span style={{ fontStyle: "normal" }}>&</span>
               {" "}
-              <span style={{ background: "linear-gradient(135deg, #818cf8, #a78bfa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+              <span style={{ background: "var(--gradient)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                 visual work.
               </span>
             </p>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "15px", lineHeight: 1.75, color: "#5e5980", maxWidth: "420px" }}>
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "15px", lineHeight: 1.75, color: "var(--text-muted)", maxWidth: "420px" }}>
               right-brained activities. click on a project to see more.
             </p>
           </div>
@@ -167,7 +190,7 @@ export default function Design() {
           }}
         >
           {PIECES.map((piece, i) => (
-            <Reveal key={piece.title} delay={i * 80}>
+            <Reveal key={piece.title + i} delay={i * 80}>
               <button
                 onClick={() => setSelected(piece)}
                 style={{
@@ -181,13 +204,13 @@ export default function Design() {
                   flexDirection: "column",
                   borderRadius: "12px",
                   overflow: "hidden",
-                  outline: "1px solid rgba(255,255,255,0.06)",
+                  outline: "1px solid var(--border)",
                   transition: "transform 0.3s ease, box-shadow 0.3s ease",
                 }}
                 onMouseEnter={(e) => {
                   const el = e.currentTarget as HTMLButtonElement;
                   el.style.transform = "translateY(-4px)";
-                  el.style.boxShadow = "0 20px 60px rgba(129,140,248,0.1)";
+                  el.style.boxShadow = "0 20px 60px var(--accent-soft)";
                 }}
                 onMouseLeave={(e) => {
                   const el = e.currentTarget as HTMLButtonElement;
@@ -200,11 +223,11 @@ export default function Design() {
                   style={{
                     overflow: "hidden",
                     aspectRatio: i % 3 === 0 ? "4/3" : "16/10",
-                    background: "#1b1828",
+                    background: "var(--surface-2)",
                   }}
                 >
                   <img
-                    src={piece.img}
+                    src={piece.images[0]}
                     alt={piece.title}
                     style={{
                       width: "100%",
@@ -228,19 +251,19 @@ export default function Design() {
                 </div>
 
                 {/* Caption */}
-                <div style={{ padding: "20px 24px 24px", background: "#14121e" }}>
+                <div style={{ padding: "20px 24px 24px", background: "var(--surface)" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "8px" }}>
-                    <h3 style={{ fontFamily: "'Fraunces', serif", fontSize: "20px", fontWeight: 400, fontStyle: "italic", color: "#e9e5f5", letterSpacing: "-0.01em" }}>
+                    <h3 style={{ fontFamily: "'Fraunces', serif", fontSize: "20px", fontWeight: 400, fontStyle: "italic", color: "var(--text)", letterSpacing: "-0.01em" }}>
                       {piece.title}
                     </h3>
-                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", color: "#5e5980", marginTop: "4px" }}>
+                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", color: "var(--text-muted)", marginTop: "4px" }}>
                       {piece.year}
                     </span>
                   </div>
-                  <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", letterSpacing: "0.07em", textTransform: "uppercase", color: "#818cf8", marginBottom: "8px", opacity: 0.8 }}>
+                  <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", letterSpacing: "0.07em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "8px", opacity: 0.8 }}>
                     {piece.medium}
                   </p>
-                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", lineHeight: 1.65, color: "#5e5980" }}>
+                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", lineHeight: 1.65, color: "var(--text-muted)" }}>
                     {piece.description}
                   </p>
                 </div>
