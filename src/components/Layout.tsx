@@ -167,6 +167,12 @@ export default function Layout() {
   const { dark, setDark } = useTheme()
   const location = useLocation()
   const isHome = location.pathname === "/"
+  const navBg = dark ? "rgba(234,232,242,0.85)" : "rgba(15,15,15,0.95)"
+  const navText = dark ? "#18162a" : "#e9e5f5"
+  const navTextSecondary = dark ? "#58526e" : "#9b96b8"
+  const navTextMuted = dark ? "#9490a8" : "#5e5980"
+  const navBorder = dark ? "rgba(90,84,112,0.15)" : "rgba(255,255,255,0.1)"
+  const navAccent = dark ? "#5b5bd6" : "#818cf8"
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior })
@@ -188,165 +194,152 @@ export default function Layout() {
       <BackgroundBlobs />
       <CustomCursor />
 
-      <nav
+    <nav
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 50,
+        background: navBg,
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
+        borderBottom: `1px solid ${navBorder}`,
+        transition: "background 0.3s",
+      }}
+    >
+      <div
         style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 50,
-          background: dark ? "rgba(12,11,20,0.8)" : "rgba(244,243,249,0.8)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-          borderBottom: "1px solid var(--border)",
-          transition: "background 0.3s",
+          maxWidth: "1300px",
+          margin: "0 auto",
+          padding: "0 52px",
+          height: "60px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "24px",
         }}
       >
-        <div
-          style={{
-            maxWidth: "1300px",
-            margin: "0 auto",
-            padding: "0 52px",
-            height: "60px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "24px",
-          }}
-        >
-          {/* Brand */}
-          <NavLink to="/" style={{ textDecoration: "none", flexShrink: 0 }}>
-            <span
-              style={{
-                fontFamily: "'Fraunces', serif",
-                fontSize: "19px",
-                fontWeight: 400,
-                color: "var(--text)",
-                letterSpacing: "-0.01em",
-              }}
-            >
-              dhrithi ashokkumar
-            </span>
-          </NavLink>
-
-          {/* Page nav */}
-          <div style={{ display: "flex", gap: "32px", alignItems: "center" }}>
-            {[
-              { to: "/", label: "About" },
-              { to: "/projects", label: "Projects" },
-              { to: "/design", label: "Design" },
-            ].map(({ to, label }) => (
-              <NavLink
-                key={to}
-                to={to}
-                end={to === "/"}
-                style={({ isActive }) => ({
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: "13.5px",
-                  fontWeight: 500,
-                  letterSpacing: "0.01em",
-                  color: isActive ? "var(--accent)" : "var(--text-secondary)",
-                  textDecoration: "none",
-                  paddingBottom: "2px",
-                  borderBottom: isActive
-                    ? "1.5px solid var(--accent)"
-                    : "1.5px solid transparent",
-                  transition: "color 0.2s, border-color 0.2s",
-                })}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLAnchorElement
-                  if (!el.getAttribute("aria-current"))
-                    el.style.color = "var(--text)"
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLAnchorElement
-                  if (!el.getAttribute("aria-current"))
-                    el.style.color = "var(--text-secondary)"
-                }}
-              >
-                {label}
-              </NavLink>
-            ))}
-
-            {/* Section anchors — only on home page */}
-            {isHome && (
-              <>
-                <div
-                  style={{
-                    width: "1px",
-                    height: "14px",
-                    background: "var(--border-strong)",
-                  }}
-                />
-                {[
-                  { id: "experience", label: "Experience" },
-                  { id: "education", label: "Education" },
-                ].map(({ id, label }) => (
-                  <button
-                    key={id}
-                    onClick={() => scrollToSection(id)}
-                    style={{
-                      background: "none",
-                      border: "none",
-                      cursor: "pointer",
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: "13px",
-                      fontWeight: 400,
-                      color: "var(--text-muted)",
-                      padding: 0,
-                      transition: "color 0.2s",
-                    }}
-                    onMouseEnter={(e) =>
-                      ((e.currentTarget as HTMLButtonElement).style.color =
-                        "var(--accent)")
-                    }
-                    onMouseLeave={(e) =>
-                      ((e.currentTarget as HTMLButtonElement).style.color =
-                        "var(--text-muted)")
-                    }
-                  >
-                    {label}
-                  </button>
-                ))}
-              </>
-            )}
-          </div>
-
-          {/* Theme toggle */}
-          <button
-            onClick={() => setDark((d) => !d)}
-            title="Toggle theme"
+        {/* Brand */}
+        <NavLink to="/" style={{ textDecoration: "none", flexShrink: 0 }}>
+          <span
             style={{
-              background: "none",
-              border: "1px solid var(--border)",
-              cursor: "pointer",
-              color: "var(--text-muted)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "34px",
-              height: "34px",
-              borderRadius: "8px",
-              flexShrink: 0,
-              transition: "color 0.2s, background 0.2s, border-color 0.2s",
-            }}
-            onMouseEnter={(e) => {
-              const el = e.currentTarget as HTMLButtonElement
-              el.style.color = "var(--accent)"
-              el.style.background = "var(--accent-soft)"
-              el.style.borderColor = "var(--accent)"
-            }}
-            onMouseLeave={(e) => {
-              const el = e.currentTarget as HTMLButtonElement
-              el.style.color = "var(--text-muted)"
-              el.style.background = "none"
-              el.style.borderColor = "var(--border)"
+              fontFamily: "'Fraunces', serif",
+              fontSize: "19px",
+              fontWeight: 400,
+              color: navText,
+              letterSpacing: "-0.01em",
             }}
           >
-            {dark ? <Sun size={15} /> : <Moon size={15} />}
-          </button>
+            dhrithi ashokkumar
+          </span>
+        </NavLink>
+
+        {/* Page nav */}
+        <div style={{ display: "flex", gap: "32px", alignItems: "center" }}>
+          {[
+            { to: "/", label: "About" },
+            { to: "/projects", label: "Projects" },
+            { to: "/design", label: "Design" },
+          ].map(({ to, label }) => (
+            <NavLink
+              key={to}
+              to={to}
+              end={to === "/"}
+              style={({ isActive }) => ({
+                fontFamily: "'Inter', sans-serif",
+                fontSize: "13.5px",
+                fontWeight: 500,
+                letterSpacing: "0.01em",
+                color: isActive ? navAccent : navTextSecondary,
+                textDecoration: "none",
+                paddingBottom: "2px",
+                borderBottom: isActive
+                  ? `1.5px solid ${navAccent}`
+                  : "1.5px solid transparent",
+                transition: "color 0.2s, border-color 0.2s",
+              })}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget as HTMLAnchorElement
+                if (!el.getAttribute("aria-current")) el.style.color = navText
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget as HTMLAnchorElement
+                if (!el.getAttribute("aria-current")) el.style.color = navTextSecondary
+              }}
+            >
+              {label}
+            </NavLink>
+          ))}
+
+          {isHome && (
+            <>
+              <div style={{ width: "1px", height: "14px", background: navBorder }} />
+              {[
+                { id: "experience", label: "Experience" },
+                { id: "education", label: "Education" },
+              ].map(({ id, label }) => (
+                <button
+                  key={id}
+                  onClick={() => scrollToSection(id)}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: "13px",
+                    fontWeight: 400,
+                    color: navTextMuted,
+                    padding: 0,
+                    transition: "color 0.2s",
+                  }}
+                  onMouseEnter={(e) =>
+                    ((e.currentTarget as HTMLButtonElement).style.color = navAccent)
+                  }
+                  onMouseLeave={(e) =>
+                    ((e.currentTarget as HTMLButtonElement).style.color = navTextMuted)
+                  }
+                >
+                  {label}
+                </button>
+              ))}
+            </>
+          )}
         </div>
-      </nav>
+
+        {/* Theme toggle */}
+        <button
+          onClick={() => setDark((d) => !d)}
+          title="Toggle theme"
+          style={{
+            background: "none",
+            border: `1px solid ${navBorder}`,
+            cursor: "pointer",
+            color: navTextMuted,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "34px",
+            height: "34px",
+            borderRadius: "8px",
+            flexShrink: 0,
+            transition: "color 0.2s, background 0.2s, border-color 0.2s",
+          }}
+          onMouseEnter={(e) => {
+            const el = e.currentTarget as HTMLButtonElement
+            el.style.color = navAccent
+            el.style.borderColor = navAccent
+          }}
+          onMouseLeave={(e) => {
+            const el = e.currentTarget as HTMLButtonElement
+            el.style.color = navTextMuted
+            el.style.borderColor = navBorder
+          }}
+        >
+          {dark ? <Sun size={15} /> : <Moon size={15} />}
+        </button>
+      </div>
+    </nav>
 
       <main style={{ paddingTop: "60px", position: "relative", zIndex: 1 }}>
         <Outlet />
