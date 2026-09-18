@@ -230,6 +230,7 @@ export default function Layout() {
               width: "44px",
               borderRadius: "8px",
               display: "block",
+              filter: dark ? "none" : "invert(1) brightness(2)",
             }}
           />
         </NavLink>
