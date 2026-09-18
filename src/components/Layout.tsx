@@ -222,17 +222,16 @@ export default function Layout() {
       >
         {/* Brand */}
         <NavLink to="/" style={{ textDecoration: "none", flexShrink: 0 }}>
-          <span
+          <img
+            src="/logo.png"
+            alt="Dhrithi Ashokkumar"
             style={{
-              fontFamily: "'Fraunces', serif",
-              fontSize: "19px",
-              fontWeight: 400,
-              color: navText,
-              letterSpacing: "-0.01em",
+              height: "44px",
+              width: "44px",
+              borderRadius: "8px",
+              display: "block",
             }}
-          >
-            dhrithi ashokkumar
-          </span>
+          />
         </NavLink>
 
         {/* Page nav */}

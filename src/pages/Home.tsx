@@ -193,7 +193,7 @@ export default function Home() {
             className="fade-up delay-100"
             style={{
               fontFamily: "'Fraunces', serif",
-              fontSize: "clamp(52px, 6.5vw, 84px)",
+              fontSize: "clamp(40px, 5vw, 70px)",
               fontWeight: 300,
               lineHeight: 1.04,
               letterSpacing: "-0.025em",
@@ -201,7 +201,7 @@ export default function Home() {
               marginBottom: "28px",
             }}
           >
-            hi, i'm dhrithi -
+            hi, i'm dhrithi ashokkumar.
             <br />
             <span
               style={{
