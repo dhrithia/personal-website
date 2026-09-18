@@ -20,6 +20,19 @@ function Reveal({ children, delay = 0 }: { children: ReactNode; delay?: number }
   );
 }
 
+type Project = {
+  title: string;
+  year: string;
+  type: string;
+  tags: string[];
+  summary: string;
+  description: string;
+  highlights: string[];
+  github?: string;
+  demo?: string;
+  award?: string;
+};
+
 const PROJECTS = [
   {
     title: "CNOW",
@@ -54,8 +67,6 @@ const PROJECTS = [
     github: "https://github.com/dhrithia/SevenCodefest",
   },
 ];
-
-type Project = typeof PROJECTS[0];
 
 function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
   useEffect(() => {
