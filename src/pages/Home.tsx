@@ -248,10 +248,10 @@ export default function Home() {
             className="fade-up delay-300"
             style={{ display: "flex", gap: "10px", alignItems: "center" }}
           >
-            <SocialLink href="https://github.com" label="GitHub">
+            <SocialLink href="https://github.com/dhrithia" label="GitHub">
               <GithubIcon size={17} />
             </SocialLink>
-            <SocialLink href="https://linkedin.com" label="LinkedIn">
+            <SocialLink href="https://www.linkedin.com/in/dhrithi-ashokkumar/" label="LinkedIn">
               <LinkedinIcon size={17} />
             </SocialLink>
             <SocialLink href="mailto:ashokkumar.dhrithi@gmail.com" label="Email">
