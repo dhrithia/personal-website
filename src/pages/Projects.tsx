@@ -283,7 +283,7 @@ export default function Projects() {
   const [selected, setSelected] = useState<Project | null>(null);
 
   return (
-    <div style={{ maxWidth: "1160px", margin: "0 auto", padding: "0 48px 96px" }}>
+    <div style={{ maxWidth: "1300px", margin: "0 auto", padding: "0 52px 96px" }}>
       <Reveal>
         <div style={{ marginBottom: "64px", paddingTop: "56px" }}>
           <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--accent)", background: "var(--accent-soft)", padding: "5px 12px", borderRadius: "6px" }}>

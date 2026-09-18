@@ -128,7 +128,7 @@ export default function Design() {
 
   return (
     <div style={{ minHeight: "100vh", background: "#0c0b14" }}>
-      <div style={{ maxWidth: "1160px", margin: "0 auto", padding: "0 48px 96px" }}>
+      <div style={{ maxWidth: "1300px", margin: "0 auto", padding: "0 52px 96px" }}>
 
         {/* Header */}
         <Reveal>

@@ -1,16 +1,13 @@
-import { createContext, useContext, type Dispatch, type SetStateAction } from "react";
+import { createContext, useContext } from "react";
 
-export type ThemeContextValue = {
+interface ThemeContextType {
   dark: boolean;
-  setDark: Dispatch<SetStateAction<boolean>>;
-};
-
-export const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
-
-export function useTheme() {
-  const ctx = useContext(ThemeContext);
-  if (!ctx) {
-    throw new Error("useTheme must be used within ThemeContext.Provider");
-  }
-  return ctx;
+  setDark: (dark: boolean | ((prev: boolean) => boolean)) => void;
 }
+
+export const ThemeContext = createContext<ThemeContextType>({
+  dark: false,
+  setDark: () => {},
+});
+
+export const useTheme = () => useContext(ThemeContext);
