@@ -225,7 +225,7 @@ export default function Layout() {
                 letterSpacing: "-0.01em",
               }}
             >
-              Dhrithi Ashokkumar
+              dhrithi ashokkumar
             </span>
           </NavLink>
 

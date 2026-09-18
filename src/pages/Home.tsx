@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, type ReactNode } from "react"
 import { MapPin, Mail, FileDown } from "lucide-react"
+import profilePhoto from "../assets/headshot4_png.png"
 
 /* ── scroll reveal ── */
 function Reveal({
@@ -103,49 +104,49 @@ function SocialLink({
 const EXPERIENCE = [
   {
     company: "CSL Behring",
-    role: "AI Automation Co-op",
-    period: "Sep 2025 - Present",
-    location: "King of Prussia, PA",
+    role: "AI automation co-op",
+    period: "sep 2025 - present",
+    location: "king of prussia, PA",
     bullets: [
-      "Developed AI automation solutions with Copilot Studio and Power Automate to support enterprise workflows",
-      "Designed agent‑based solutions (FAQ agents, search agents, intake automations) used by internal stakeholders",
-      "Collaborated with cross‑functional teams to document processes and scale reusable automation components",
-      "Supporting ongoing AI initiatives post‑co‑op, contributing part‑time while completing undergraduate degree",
+      "developed AI automation solutions with Copilot Studio and Power Automate to support enterprise workflows",
+      "designed agent‑based solutions (FAQ agents, search agents, intake automations) used by internal stakeholders",
+      "collaborated with cross‑functional teams to document processes and scale reusable automation components",
+      "supporting ongoing AI initiatives post‑co‑op, contributing part‑time while completing undergraduate degree",
     ],
     tech: ["Copilot Studio", "Power Automate"],
   },
   {
     company: "Comcast",
-    role: "Software Engineer Co-op",
-    period: "Sep 2024 - Mar 2025",
-    location: "Philadelphia, PA",
+    role: "software engineer co-op",
+    period: "sep 2024 - mar 2025",
+    location: "philadelphia, PA",
     bullets: [
-      "Engineered ~30 front-end and back-end API functions with SQLAlchemy for efficient PostgreSQL data handling",
-      "Maintained and enhanced CI/CD pipelines with Concourse to automate build, test, and deployment processes",
-      "Created unit and integration tests, utilizing AWS SQS and AWS Lambda to validate message workflows",
-      "Applied test-driven development and collaborated in code reviews via Jira within an Agile Scrum framework",
+      "engineered ~30 front-end and back-end API functions with SQLAlchemy for efficient PostgreSQL data handling",
+      "maintained and enhanced CI/CD pipelines with Concourse to automate build, test, and deployment processes",
+      "created unit and integration tests, utilizing AWS SQS and AWS Lambda to validate message workflows",
+      "applied test-driven development and collaborated in code reviews via Jira within an Agile Scrum framework",
     ],
     tech: ["Python", "SQL", "AWS SQS", "AWS Lambda", "Concourse CI"],
   },
   {
     company: "Twelve Gates Arts",
-    role: "Social Media and Program Coordinator Co-op",
-    period: "Sep 2023 – Mar 2024",
-    location: "Philadelphia, PA",
+    role: "social media and program coordinator co-op",
+    period: "sep 2023 – mar 2024",
+    location: "philadelphia, PA",
     bullets: [
-      "Oversaw all digital marketing and PR responsibilities, including content creation for social media and website",
-      "Directed all events and programs at the gallery, including 5 exhibitions displaying South Asian culture",
+      "oversaw all digital marketing and PR responsibilities, including content creation for social media and website",
+      "directed all events and programs at the gallery, including 5 exhibitions displaying South Asian culture",
     ],
     tech: [],
   },
 ]
 
 const COURSEWORK = [
-  { code: "CS 260", name: "Data Structures" },
-  { code: "CS 380", name: "Artificial Intelligence" },
-  { code: "CS 277", name: "Algorithms & Analysis" },
-  { code: "SE 310", name: "Software Design" },
-  { code: "CS 465", name: "Privacy and Trust" },
+  { code: "CS 260", name: "data structures" },
+  { code: "CS 380", name: "artificial intelligence" },
+  { code: "CS 277", name: "algorithms & analysis" },
+  { code: "SE 310", name: "software design" },
+  { code: "CS 465", name: "privacy and trust" },
 ]
 
 export default function Home() {
@@ -159,10 +160,10 @@ export default function Home() {
       <section
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 340px",
+          gridTemplateColumns: "1fr 400px",
           gap: "64px",
           alignItems: "center",
-          minHeight: "88vh",
+          minHeight: "95vh",
           paddingTop: "40px",
           paddingBottom: "40px",
         }}
@@ -184,7 +185,7 @@ export default function Home() {
                 border: "1px solid var(--accent-soft)",
               }}
             >
-              cs & data science · drexel '27
+              computer science · drexel '27
             </span>
           </div>
 
@@ -200,7 +201,7 @@ export default function Home() {
               marginBottom: "28px",
             }}
           >
-            hi, i'm dhrithi.
+            hi, i'm dhrithi -
             <br />
             <span
               style={{
@@ -238,10 +239,9 @@ export default function Home() {
               marginBottom: "40px",
             }}
           >
-            I'm building projects at the intersection of thoughtful engineering and
-            good design. Currently interning on CSL Behring's AI Automation
-            team, previously SWE at Comcast, and always learning something on my
-            own.
+            i like building things that work well and look good. currently
+            interning on CSL Behring's AI automation team, previously SWE
+            at Comcast, and always chasing the next idea.
           </p>
 
           <div
@@ -283,8 +283,8 @@ export default function Home() {
           >
             <div
               style={{
-                width: "260px",
-                height: "260px",
+                width: "320px",
+                height: "320px",
                 borderRadius: "50%",
                 background: "var(--surface-2)",
                 display: "flex",
@@ -294,47 +294,15 @@ export default function Home() {
                 position: "relative",
               }}
             >
-              {/* Placeholder content */}
-              <div
+              <img
+                src={profilePhoto}
+                alt="dhrithi ashokkumar"
                 style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  gap: "8px",
-                  userSelect: "none",
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
                 }}
-              >
-                <div
-                  style={{
-                    width: "72px",
-                    height: "72px",
-                    borderRadius: "50%",
-                    background: "var(--gradient)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontFamily: "'Fraunces', serif",
-                    fontSize: "26px",
-                    fontWeight: 400,
-                    color: "white",
-                    letterSpacing: "-0.02em",
-                  }}
-                >
-                  AC
-                </div>
-                <p
-                  style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: "11px",
-                    color: "var(--text-muted)",
-                    textAlign: "center",
-                    lineHeight: 1.4,
-                    padding: "0 24px",
-                  }}
-                >
-                  Add your photo here
-                </p>
-              </div>
+              />
             </div>
           </div>
 
@@ -383,7 +351,7 @@ export default function Home() {
                   marginTop: "8px",
                 }}
               >
-                Where I've Worked
+                where I've worked
               </h2>
             </div>
             <a
@@ -617,7 +585,7 @@ export default function Home() {
                 )}
 
                 {/* Bottom spacing */}
-                <div style={{ height: i < EXPERIENCE.length - 1 ? "28px" : "0" }} />
+                <div style={{ height: "28px" }} />
               </div>
             </Reveal>
           ))}
@@ -647,7 +615,7 @@ export default function Home() {
               marginBottom: "40px",
             }}
           >
-            Where I've Studied
+            where I've studied
           </h2>
         </Reveal>
 
@@ -705,7 +673,17 @@ export default function Home() {
                     marginBottom: "4px",
                   }}
                 >
-                  B.S. Computer Science
+                  B.S. computer science
+                </p>
+                <p
+                  style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: "14px",
+                    color: "var(--text-secondary)",
+                    marginBottom: "4px",
+                  }}
+                >
+                  minors: data science, animation & VFX
                 </p>
                 <p
                   style={{
@@ -738,9 +716,9 @@ export default function Home() {
                   }}
                 >
                   {[
-                    "Women in Computing Society - Professional Development Chair",
-                    "Philly Maza Dance Team - Public Relations Chair",
-                    "Industry Mentorship Program",
+                    "women in computing society - director of professional development",
+                    "philly maza dance team - public relations chair",
+                    "industry mentorship program",
                   ].map((a, idx) => (
                     <li
                       key={idx}
