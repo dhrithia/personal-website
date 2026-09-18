@@ -341,7 +341,7 @@ export default function Layout() {
       </div>
     </nav>
 
-      <main style={{ paddingTop: "60px", position: "relative", zIndex: 1 }}>
+      <main style={{ paddingTop: "60px", position: "relative" }}>
         <Outlet />
       </main>
 
